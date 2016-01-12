@@ -1,0 +1,896 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="社会和产品的发展总是向着便利和智能的方法发展,对于手机的App来说也是如此.所以,现在的App都在缩减流程,优化使用体验,为的就是让用户用起来更加便利,提高App的入手度和用户粘性.那么另一方面的智能呢?一个比较简单智能的实现方法就是在输入的地方加上语音识别,在输出显示的时候加上语音合成,直接进行语音播报,那么是不是对于司机等来说就是一个智能的体现呢?
+现在做语音识别有一些不错的开放平台可以给我们">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用讯飞开放平台实现语音识别合成">
+<meta property="og:url" content="http://yoursite.com/2016/01/12/shapeng/index.html">
+<meta property="og:site_name" content="coder_peng">
+<meta property="og:description" content="社会和产品的发展总是向着便利和智能的方法发展,对于手机的App来说也是如此.所以,现在的App都在缩减流程,优化使用体验,为的就是让用户用起来更加便利,提高App的入手度和用户粘性.那么另一方面的智能呢?一个比较简单智能的实现方法就是在输入的地方加上语音识别,在输出显示的时候加上语音合成,直接进行语音播报,那么是不是对于司机等来说就是一个智能的体现呢?
+现在做语音识别有一些不错的开放平台可以给我们">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/005KqbSEgw1eyle52fn2gj31kw0etaev.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/005KqbSEgw1eylebbmst7j30f20fy772.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/005KqbSEgw1eymahpu0z2g309g0go0zo.gif">
+<meta property="og:updated_time" content="2016-01-12T12:46:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用讯飞开放平台实现语音识别合成">
+<meta name="twitter:description" content="社会和产品的发展总是向着便利和智能的方法发展,对于手机的App来说也是如此.所以,现在的App都在缩减流程,优化使用体验,为的就是让用户用起来更加便利,提高App的入手度和用户粘性.那么另一方面的智能呢?一个比较简单智能的实现方法就是在输入的地方加上语音识别,在输出显示的时候加上语音合成,直接进行语音播报,那么是不是对于司机等来说就是一个智能的体现呢?
+现在做语音识别有一些不错的开放平台可以给我们">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> 使用讯飞开放平台实现语音识别合成 | coder_peng </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">coder_peng</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-heartbeat fa-fw"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                使用讯飞开放平台实现语音识别合成
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-01-12T20:45:24+08:00" content="2016-01-12">
+              2016-01-12
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/12/shapeng/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/12/shapeng/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p> <span itemprop="articleBody"><p>社会和产品的发展总是向着便利和智能的方法发展,对于手机的App来说也是如此.所以,现在的App都在缩减流程,优化使用体验,为的就是让用户用起来更加便利,提高App的入手度和用户粘性.那么另一方面的智能呢?<br><a id="more"></a><br>一个比较简单智能的实现方法就是在输入的地方加上语音识别,在输出显示的时候加上语音合成,直接进行语音播报,那么是不是对于司机等来说就是一个智能的体现呢?</p></span></p>
+<p></p><p>现在做语音识别有一些不错的开放平台可以给我们直接提供使用,一家是科大讯飞开放平台,一家是百度语音开放平台.我个人比较喜欢讯飞,因为讯飞的优势是在大段文字的识别上,准确率比较高.这正好符合我的需求,这篇博客也主要讲的是讯飞语音SDK的使用.还是惯例,将科大讯飞的开放平台地址奉上.另外还有讯飞的SDK开发API和教程地址奉上</p><p></p>
+<p></p><p><a href="http://www.xfyun.cn" target="_blank" rel="external">讯飞开放平台传送门</a><br><a href="http://www.xfyun.cn/doccenter/iOS" target="_blank" rel="external">讯飞开发API文档传送门</a></p><p></p>
+<p></p><p></p><h2>讯飞开发步骤</h2><br>讯飞开发教程上写的比较清楚也比较啰嗦,并不是一个最简洁的Demo.所以我在这篇博客里进行了一些适当的删减,争取做一个最简单的demo.<p></p><p></p>
+<p></p><p></p><h4>1 申请账号ID</h4>登陆到讯飞开放平台上,在用户菜单栏里就有创建我的应用.这里的登陆也可以采用第三方的方式.在创建应用的界面填写相关的信息即可.然后就会有一个SDK下载的链接.如果没有,直接去SDK下载中心按照三步选项去进行新的下载即可.这里不做过多的描述.<p></p><p></p>
+<p></p><p></p><h4>2 导入讯飞SDK框架</h4>下载下来的SDK包解压出来有三个文件夹,第一个市doc文件夹,不多说,肯定是开发文档,还有相关的作者信息什么的.最重要的是剩下的两个文件夹,一个是lib文件夹,这里存放的是讯飞SDK的类库文件,我们导入SDK就是导入的这里的文件.第三个文件夹是一个IOS的Demo演示工程.<br>1 添加静态库<br>新建一个IOS工程,将lib文件夹下的”iflyMSC.framework”文件拷贝到工程目录下,然后在工程配置文件的[Build Phases]-[Link Binary With Libraries]中通过[AddOther]<br>2 确认SDK路径<br>在配置文件中搜索”head”找到[Framework Search Paths],点开查看SDK的路径是不是绝对路径,如果是如下图的样子,那就没问题了.这一步主要是确保SDK的路径为相对路径,防止工程换了文件夹位置就无法运行的情况的发生.<br><img src="http://ww3.sinaimg.cn/large/005KqbSEgw1eyle52fn2gj31kw0etaev.jpg"><br>3 添加框架<br>按照下图依次将图中的所有的框架添加到工程里面.讯飞官网API中给出的截图是XCode7以前的,XCode7之后一些动态链接库的后缀名发生了改变,Xcode7中添加完毕之后如下图:<br><img src="http://ww4.sinaimg.cn/large/005KqbSEgw1eylebbmst7j30f20fy772.jpg"><p></p><p></p>
+<p></p><p></p><h4>语音识别</h4><br>语音识别分两种,分别用在不同的场合,一个是界面提示的语音识别,一个是无界面提示的语音识别,这里以有界面提示的语音识别为例子.<p></p><p></p>
+<h5>有界面提示的语音识别</h5>
+
+<p></p><p>1 导入头文件</p><p></p>
+<pre>//将讯飞SDK中的所有类都导入进来
+#import < iflyMSC/iflyMSC.h >
+</pre>
+
+<p></p><p>2 登陆讯飞服务器<br>在使用讯飞的语音解析之前,需要进行用户身份验证,即登陆讯飞服务器,这个在viewDidLoad()方法中添加两行代码即可.后面的ID数字就是之前我们在开放平台创建按自己应用时给的APPID,在下载的SDK中也是有的.</p><p></p>
+<pre>NSString *initString = [[NSString alloc] initWithFormat:@"appid=%@",@"565e4dd9"];
+[IFlySpeechUtility createUtility:initString];
+</pre>
+
+<p></p><p>3 创建有界面提示的语音识别对象<br>创建一个讯飞语音识别对象,可以对他进行一系列的调用<br><pre>@property (nonatomic, strong) IFlyRecognizerView *iflyRecognizerView;//带界面的识别对象<br></pre></p><p></p>
+<p></p><p>4 初始化带界面的识别对象<br>前面声明了一个带界面的语音识别对象,现在需要对这个识别对象进行初始化,同样是在ViewDidLoad()方法中进行就行.</p><p></p>
+<pre>#pragma mark ------ 进行有界面的语音识别的初始化
+_iflyRecognizerView = [[IFlyRecognizerView alloc] initWithCenter:self.view.center];
+_iflyRecognizerView.delegate = self;
+[_iflyRecognizerView setParameter: @"iat" forKey: [IFlySpeechConstant IFLY_DOMAIN]];
+//asr_audio_path保存录音文件名，如不再需要，设置value为nil表示取消，默认目录是documents
+[_iflyRecognizerView setParameter:@"asrview.pcm " forKey:[IFlySpeechConstant ASR_AUDIO_PATH]];
+</pre>
+
+<p></p><p>5 实现代理方法<br>讯飞对识别结果的处理采用的代理回调的方法,实现IFlySpeechSynthesizerDelegate协议的onResult:isLast:方法.<br>注意!!!!这里的是onResult,不是onResults,后者是无界面提示的语音解析的结果回调函数.</p><p></p>
+<pre>- (void)onResult: (NSArray *)resultArray isLast:(BOOL) isLast
+{
+    NSMutableString *result = [[NSMutableString alloc] init];
+    NSDictionary *dic = [resultArray objectAtIndex:0];
+    for (NSString *key in dic) {
+        [result appendFormat:@"%@",key];
+    }
+    NSString * resu = [ISRDataHelper stringFromJson:result];
+    //将结果显示在界面的Label上
+    _text.text = [NSString stringWithFormat:@"%@%@",_text.text,resu];
+}
+</pre>
+这里默认的传回来的是Json字符串,需要对字符串进行解析.当然,讯飞还是比较良心的,在demo中给提供了一个解析类,就是上面用到的ISRDataHelper.用它来进行解析就可以了.
+
+6 触发开始语音识别
+拖动一个Button,给一个响应事件,用于开始监听语音识别
+<pre>//启动识别服务
+[_iflyRecognizerView start];</pre>
+
+<p></p><p>这个时候运行App,就可以进行语音识别了,运行的结果应该如下图:<br><img src="http://ww2.sinaimg.cn/large/005KqbSEgw1eymahpu0z2g309g0go0zo.gif"></p><p></p>
+<p></p><p></p><h5>无界面提示的语音识别</h5><br>无界面提示的语音识别适合将语音识别放在后台,这个看具体的使用场景.无界面的方式相对来说简洁大方,可制定性高.<br>1 导入头文件<p></p><p></p>
+<pre>//将讯飞SDK中的所有类都导入进来
+#import < iflyMSC/iflyMSC.h >
+</pre>
+
+<p></p><p>2 登陆讯飞服务器<br>在使用讯飞的语音解析之前,需要进行用户身份验证,即登陆讯飞服务器,这个在viewDidLoad()方法中添加两行代码即可.后面的ID数字就是之前我们在开放平台创建按自己应用时给的APPID,在下载的SDK中也是有的.</p><p></p>
+<pre>NSString *initString = [[NSString alloc] initWithFormat:@"appid=%@",@"565e4dd9"];
+[IFlySpeechUtility createUtility:initString];
+</pre>
+
+<p></p><p>3 创建无界面提示的语音识别对象<br>创建一个讯飞语音识别对象,可以对他进行一系列的调用<br><pre>@property (nonatomic, strong) IFlySpeechRecognizer *iFlySpeechRecognizer;//不带界面的识别对象<br></pre></p><p></p>
+<p></p><p>4 对象初始化<br>前面声明了一些在语音合成的时候会用到的对象,现在需要对前面的对象进行初始化.还是在ViewDidLoad()里面进行就可以了.这里的初始化内容比较多,是进行一些语音的设置,所以单独做成了一个方法,在ViewDidLoad()中进行调用即可.</p><p></p>
+<pre>-(void)initRecognizer{
+//单例模式，无UI的实例
+if (_iFlySpeechRecognizer == nil) {
+   _iFlySpeechRecognizer = [IFlySpeechRecognizer sharedInstance];            [_iFlySpeechRecognizer setParameter:@"" forKey:[IFlySpeechConstant PARAMS]];
+   //设置听写模式
+   [_iFlySpeechRecognizer setParameter:@"iat" forKey:[IFlySpeechConstant IFLY_DOMAIN]];
+}
+_iFlySpeechRecognizer.delegate = self;    
+if (_iFlySpeechRecognizer != nil) {
+   IATConfig *instance = [IATConfig sharedInstance];     
+   //设置最长录音时间
+   [_iFlySpeechRecognizer setParameter:instance.speechTimeout forKey:[IFlySpeechConstant SPEECH_TIMEOUT]];
+   //设置后端点
+   [_iFlySpeechRecognizer setParameter:instance.vadEos forKey:[IFlySpeechConstant VAD_EOS]];
+    //设置前端点
+    [_iFlySpeechRecognizer setParameter:instance.vadBos forKey:[IFlySpeechConstant VAD_BOS]];
+    //网络等待时间
+    [_iFlySpeechRecognizer setParameter:@"20000" forKey:[IFlySpeechConstant NET_TIMEOUT]];    
+    //设置采样率，推荐使用16K
+    [_iFlySpeechRecognizer setParameter:instance.sampleRate forKey:[IFlySpeechConstant SAMPLE_RATE]];    
+    if ([instance.language isEqualToString:[IATConfig chinese]]) {
+        //设置语言
+        [_iFlySpeechRecognizer setParameter:instance.language forKey:[IFlySpeechConstant LANGUAGE]];
+        //设置方言
+        [_iFlySpeechRecognizer setParameter:instance.accent forKey:[IFlySpeechConstant ACCENT]];
+    }else if ([instance.language isEqualToString:[IATConfig english]]) {
+        [_iFlySpeechRecognizer setParameter:instance.language forKey:[IFlySpeechConstant LANGUAGE]];
+    }
+    //设置是否返回标点符号
+    [_iFlySpeechRecognizer setParameter:instance.dot forKey:[IFlySpeechConstant ASR_PTT]];    
+}
+}
+</pre>
+
+<p></p><p>5 实现代理方法<br>讯飞对识别结果的处理采用的代理回调的方法,实现IFlySpeechSynthesizerDelegate协议的onResult:isLast:方法.<br>注意!!!!这里的是onResults,不是onResult,前者是有界面提示的语音识别的结果回调函数.</p><p></p>
+<pre>- (void) onResults:(NSArray *) results isLast:(BOOL)isLast{
+    NSMutableString *result = [[NSMutableString alloc] init];
+    NSDictionary *dic = [results objectAtIndex:0];
+    for (NSString *key in dic) {
+        [result appendFormat:@"%@",key];
+    }
+    NSString * resu = [ISRDataHelper stringFromJson:result];
+    _text.text = [NSString stringWithFormat:@"%@%@",_text.text,resu];
+}</pre>
+
+<p></p><p>6 触发语音合成<br>添加一个输入框,一个button,button的响应时间是将输入框中的文本内容读出来.</p><p></p>
+<pre>if(_iFlySpeechRecognizer == nil)
+{
+    [self initRecognizer];
+}
+[_iFlySpeechRecognizer cancel];
+//设置音频来源为麦克风
+[_iFlySpeechRecognizer setParameter:IFLY_AUDIO_SOURCE_MIC forKey:@"audio_source"];
+//设置听写结果格式为json
+[_iFlySpeechRecognizer setParameter:@"json" forKey:[IFlySpeechConstant RESULT_TYPE]];
+//保存录音文件，保存在sdk工作路径中，如未设置工作路径，则默认保存在library/cache下
+[_iFlySpeechRecognizer setParameter:@"asr.pcm" forKey:[IFlySpeechConstant ASR_AUDIO_PATH]];
+[_iFlySpeechRecognizer setDelegate:self];
+BOOL ret = [_iFlySpeechRecognizer startListening];
+</pre>
+
+
+<p></p><p></p><h4>语音合成</h4><br>语音合成和语音识别的过程差不多<br>1 导入头文件<p></p><p></p>
+<pre>//将讯飞SDK中的所有类都导入进来
+#import < iflyMSC/iflyMSC.h >
+#import "PcmPlayer.h"
+#import "TTSConfig.h"
+</pre>
+
+<p></p><p>2 登陆讯飞服务器<br>在使用讯飞的语音解析之前,需要进行用户身份验证,即登陆讯飞服务器,这个在viewDidLoad()方法中添加两行代码即可.后面的ID数字就是之前我们在开放平台创建按自己应用时给的APPID,在下载的SDK中也是有的.</p><p></p>
+<pre>NSString *initString = [[NSString alloc] initWithFormat:@"appid=%@",@"565e4dd9"];
+[IFlySpeechUtility createUtility:initString];
+</pre>
+
+<p></p><p>3 创建有界面提示的语音识别对象<br>创建一个讯飞语音识别对象,可以对他进行一系列的调用</p><p></p>
+<pre>
+typedef NS_OPTIONS(NSInteger, SynthesizeType) {
+    NomalType           = 5,//普通合成
+    UriType             = 6, //uri合成
+};
+@property (nonatomic, strong) IFlySpeechSynthesizer * iFlySpeechSynthesizer;//语音合成对象
+@property (nonatomic, strong) PcmPlayer *audioPlayer;//用于播放音频的
+@property (nonatomic, assign) SynthesizeType synType;//是何种合成方式
+@property (nonatomic, assign) BOOL hasError;//解析过程中是否出现错误
+</pre>
+
+<p></p><p>4 对象初始化<br>前面声明了一些在语音合成的时候会用到的对象,现在需要对前面的对象进行初始化.还是在ViewDidLoad()里面进行就可以了.</p><p></p>
+<pre>TTSConfig *instance = [TTSConfig sharedInstance];
+if (instance == nil) {
+    return;
+}
+//合成服务单例
+if (_iFlySpeechSynthesizer == nil) {
+    _iFlySpeechSynthesizer = [IFlySpeechSynthesizer sharedInstance];
+}    
+_iFlySpeechSynthesizer.delegate = self;    
+//设置语速1-100
+[_iFlySpeechSynthesizer setParameter:instance.speed forKey:[IFlySpeechConstant SPEED]];    
+//设置音量1-100
+[_iFlySpeechSynthesizer setParameter:instance.volume forKey:[IFlySpeechConstant VOLUME]];    
+//设置音调1-100
+[_iFlySpeechSynthesizer setParameter:instance.pitch forKey:[IFlySpeechConstant PITCH]];   
+ //设置采样率
+ [_iFlySpeechSynthesizer setParameter:instance.sampleRate forKey:[IFlySpeechConstant SAMPLE_RATE]];
+//设置发音人
+ [_iFlySpeechSynthesizer setParameter:instance.vcnName forKey:[IFlySpeechConstant VOICE_NAME]];
+</pre>
+
+<p></p><p>5 触发语音合成<br>添加一个输入框,一个button,button的响应时间是将输入框中的文本内容读出来.</p><p></p>
+<pre>if ([self.VoiceText.text isEqualToString:@""]) {
+    return;
+}
+if (_audioPlayer != nil && _audioPlayer.isPlaying == YES) {
+    [_audioPlayer stop];
+    }
+_synType = NomalType;
+self.hasError = NO;
+[NSThread sleepForTimeInterval:0.05];
+_iFlySpeechSynthesizer.delegate = self;
+[_iFlySpeechSynthesizer startSpeaking:self.VoiceText.text];
+</pre>
+
+<p></p><p></p><h4>Demo下载</h4><br>最终写完的demo如下,下面是传送门.<br><a href="/../sourceFile/语音识别Demo/语音Lesson.zip">demo传送门</a><p></p><br><p></p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/08/hello-world/" rel="next" title="socket通信实现">
+                <i class="fa fa-chevron-left"></i> socket通信实现
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/01/12/shapeng/"
+     data-title="使用讯飞开放平台实现语音识别合成"
+     data-content=""
+     data-url="http://yoursite.com/2016/01/12/shapeng/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/01/12/shapeng/"
+           data-title="使用讯飞开放平台实现语音识别合成" data-url="http://yoursite.com/2016/01/12/shapeng/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="http://img5.duitang.com/uploads/item/201406/26/20140626193943_WGW2n.thumb.700_0.jpeg" alt="coder_peng" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">coder_peng</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">愿程序永无Bug!!!</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/pengyunge/coderpeng.github.io" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> github
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/5760897387/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> weibo
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">讯飞开发步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.1.</span> <span class="nav-text">1 申请账号ID</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.2.</span> <span class="nav-text">2 导入讯飞SDK框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.3.</span> <span class="nav-text">语音识别</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.3.1.</span> <span class="nav-text">有界面提示的语音识别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.3.2.</span> <span class="nav-text">无界面提示的语音识别</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.4.</span> <span class="nav-text">语音合成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.5.</span> <span class="nav-text">Demo下载</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">coder_peng</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"pengyunge"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>
