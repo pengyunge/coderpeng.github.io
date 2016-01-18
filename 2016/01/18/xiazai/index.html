@@ -51,21 +51,16 @@
 
 
 
-<meta name="description" content="一个趁手的App是离不开网络请求的.而一个APP与服务器之间进行通信分为两种,一种是请求响应机制的,即HTTP请求的.这个大家比较常用.这里不细说了.另外一种就是即时通信.也就是socket.下面我们就来看看socket是何物.
-TCP和UDP先抛开两种IOS中常用的通信方式,我们来看一下计算机网络中的数据包的通信.在网络中两个主机之间进行通信有两种选择:UDP标准,TCP/IP标准.UDP标准:">
+<meta name="description" content="NSURLSession下载与缓存iOS9要求网络请求需要使用NSURLSession,那么本篇文章 就使用NSURLsession来实现视频的下载,图片的下载、取消下载、恢复下 载和缓存功能，期望与大家一起学习。NSURLSessionConfiguration(参数配置类)  NSURLSession状态同时对应着多个连接,不像之前使用共享的一个全局状态。会话是通过工厂方法（类方法)来创建对象">
 <meta property="og:type" content="article">
-<meta property="og:title" content="socket通信实现">
-<meta property="og:url" content="http://yoursite.com/2016/01/08/hello-world/index.html">
+<meta property="og:title" content="NSURLSession下载与缓存">
+<meta property="og:url" content="http://yoursite.com/2016/01/18/xiazai/index.html">
 <meta property="og:site_name" content="coder_peng">
-<meta property="og:description" content="一个趁手的App是离不开网络请求的.而一个APP与服务器之间进行通信分为两种,一种是请求响应机制的,即HTTP请求的.这个大家比较常用.这里不细说了.另外一种就是即时通信.也就是socket.下面我们就来看看socket是何物.
-TCP和UDP先抛开两种IOS中常用的通信方式,我们来看一下计算机网络中的数据包的通信.在网络中两个主机之间进行通信有两种选择:UDP标准,TCP/IP标准.UDP标准:">
-<meta property="og:image" content="http://ww3.sinaimg.cn/large/005KqbSEjw1ez7rpa1d5tj30dm07iwez.jpg">
-<meta property="og:image" content="http://ww3.sinaimg.cn/large/005KqbSEjw1ez7sl7oo22j311c0butc3.jpg">
-<meta property="og:updated_time" content="2016-01-12T12:33:51.000Z">
+<meta property="og:description" content="NSURLSession下载与缓存iOS9要求网络请求需要使用NSURLSession,那么本篇文章 就使用NSURLsession来实现视频的下载,图片的下载、取消下载、恢复下 载和缓存功能，期望与大家一起学习。NSURLSessionConfiguration(参数配置类)  NSURLSession状态同时对应着多个连接,不像之前使用共享的一个全局状态。会话是通过工厂方法（类方法)来创建对象">
+<meta property="og:updated_time" content="2016-01-18T11:09:19.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="socket通信实现">
-<meta name="twitter:description" content="一个趁手的App是离不开网络请求的.而一个APP与服务器之间进行通信分为两种,一种是请求响应机制的,即HTTP请求的.这个大家比较常用.这里不细说了.另外一种就是即时通信.也就是socket.下面我们就来看看socket是何物.
-TCP和UDP先抛开两种IOS中常用的通信方式,我们来看一下计算机网络中的数据包的通信.在网络中两个主机之间进行通信有两种选择:UDP标准,TCP/IP标准.UDP标准:">
+<meta name="twitter:title" content="NSURLSession下载与缓存">
+<meta name="twitter:description" content="NSURLSession下载与缓存iOS9要求网络请求需要使用NSURLSession,那么本篇文章 就使用NSURLsession来实现视频的下载,图片的下载、取消下载、恢复下 载和缓存功能，期望与大家一起学习。NSURLSessionConfiguration(参数配置类)  NSURLSession状态同时对应着多个连接,不像之前使用共享的一个全局状态。会话是通过工厂方法（类方法)来创建对象">
 
 
 
@@ -77,7 +72,7 @@ TCP和UDP先抛开两种IOS中常用的通信方式,我们来看一下计算机�
   };
 </script>
 
-  <title> socket通信实现 | coder_peng </title>
+  <title> NSURLSession下载与缓存 | coder_peng </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -225,7 +220,7 @@ TCP和UDP先抛开两种IOS中常用的通信方式,我们来看一下计算机�
             
             
               
-                socket通信实现
+                NSURLSession下载与缓存
               
             
           </h1>
@@ -234,8 +229,8 @@ TCP和UDP先抛开两种IOS中常用的通信方式,我们来看一下计算机�
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-01-08T16:46:12+08:00" content="2016-01-08">
-              2016-01-08
+            <time itemprop="dateCreated" datetime="2016-01-18T19:07:48+08:00" content="2016-01-18">
+              2016-01-18
             </time>
           </span>
 
@@ -245,8 +240,8 @@ TCP和UDP先抛开两种IOS中常用的通信方式,我们来看一下计算机�
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/01/08/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/08/hello-world/" itemprop="commentsCount"></span>
+                <a href="/2016/01/18/xiazai/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/18/xiazai/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -265,17 +260,12 @@ TCP和UDP先抛开两种IOS中常用的通信方式,我们来看一下计算机�
       
 
       
-        <span itemprop="articleBody"><p><span itemprop="articleBody"><p>一个趁手的App是离不开网络请求的.而一个APP与服务器之间进行通信分为两种,一种是请求响应机制的,即HTTP请求的.这个大家比较常用.这里不细说了.另外一种就是即时通信.也就是socket.下面我们就来看看socket是何物.<br><a id="more"></a></p></span></p>
-<p></p><p></p><h2>TCP和UDP</h2><br>先抛开两种IOS中常用的通信方式,我们来看一下计算机网络中的数据包的通信.在网络中两个主机之间进行通信有两种选择:UDP标准,TCP/IP标准.<br>UDP标准:<br>即将数据包拆成多个小的数据包经由不同的多个交换机和路由器发送到指定的主机上.这里的交换机的路线和经过的路由器都是看当时的设备的网络繁忙状况的.所以路线也是不一定的,也会出现后发先至的情况,当然,这自然都是有解决办法的,加个顺序标记就好了嘛.当然,因为在转发的过程中可能会出现丢包的现象,所以这种方式也是一种不可靠的方式.<br>这里给插一个理解图<br><img src="http://ww3.sinaimg.cn/large/005KqbSEjw1ez7rpa1d5tj30dm07iwez.jpg"><br>TCP/IP标准:<br>这种方式采用的在两台主机之间建立一个稳定的持久的长连接,两条读写的管道,数据在这两条管道之间进行稳定的数据读写.所以这种标准相比前面的UDP来说,稳定而可靠,但是,因为要保持稳定的长连接,所以对网络资源的消耗也是比较大的.现在用的比较广的也是TCP/IP协议.这里给大家推荐本书.《TCP/IP协议详解》—分上下两卷,是对TCP/IP协议的完美解释,万变不离其宗.我们这里浅层的去理解使用以下TCP/IP协议.<p></p><p></p>
-<p></p><p></p><h2>TCP协议</h2><br>TCP协议比较复杂,这里不能详细介绍,我们依旧是肤浅的来看一下.首先给大家简单介绍两个概念<br>服务器地址和端口号.通俗上来理解,服务器地址(IP)就是可以确定是哪一台主机的标识.每台主机有唯一的一个IP地址.用于其他主机的访问.而端口就是数据进出计算机的门口.只不过这个门口有很多.端口号的范围从0到65535,但是有一些常用的端口已经成为了默认的端口.例如用于浏览网页服务的80端口，用于FTP服务的21端口,常用于tomacat的8080端口等,当然还有3389端口,大家可以自行百度”3389爆破”,有惊喜哟.<br>接下来我们来看看代码,在代码实现上,各种语言都实现了TCP协议的方法,相关的API网络上也比较多,我这里整理了一下,给大家看看.<p></p><p></p>
-<p></p><p></p><h2>C语言实现的网络通信</h2><br>C语言也是实现了TCP/IP协议的.用起来也是比较简单的,这里将API的使用步骤总结罗列了一下.<br>1 导入头文件<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="id">#import</span> &lt;sys/types.h&gt;</span><br><span class="line"><span class="id">#import</span> &lt;sys/socket.h&gt;</span><br><span class="line"><span class="id">#import</span> &lt;netinet/<span class="keyword">in</span>.h&gt;</span><br><span class="line"><span class="id">#import</span> &lt;arpa/inet.h&gt;</span><br></pre></td></tr></table></figure><p></p><p></p>
-<p></p><p>2 创建IP和端口对象<br>使用TCP/IP协议需要绑定IP地址和端口,但是在C语言里面,他的结构体又有些不同.<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//创建<span class="literal">IP</span>结构体变量,用于绑定服务器</span><br><span class="line"><span class="label">static</span> <span class="keyword">struct </span>sockaddr_in <span class="keyword">addr;</span><br><span class="line"></span><span class="keyword">addr.sin_addr.s_addr </span>= inet_addr(<span class="string">“127.0.0.1”</span>)<span class="comment">;</span></span><br><span class="line"><span class="keyword">addr.sin_port </span>= htons(<span class="number">8880</span>)<span class="comment">;</span></span><br></pre></td></tr></table></figure></p><p></p>
-<p></p><p>这里用到了一个sockaddr结构体,他里面的每个变量的含义在下面的表中.<img src="http://ww3.sinaimg.cn/large/005KqbSEjw1ez7sl7oo22j311c0butc3.jpg"></p><p></p>
-<p></p><p>3 创建一个socketClient变量<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建一个socketClient,指定为TCP协议,采用流的形式.</span></span><br><span class="line"><span class="keyword">int</span> clientSocket = socket(AF_INET,SOCK_STREAM, <span class="number">0</span>);</span><br><span class="line"><span class="comment">//根据socketClient创建与服务器的链接</span></span><br><span class="line"><span class="keyword">int</span> flag = connect(clientSocket, (<span class="keyword">struct</span> sockaddr*)&amp;addr, <span class="keyword">sizeof</span>(addr));</span><br></pre></td></tr></table></figure></p><p></p>
-<p></p><p>4 发送消息<br>发送消息是调用的send方法<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> sendstring[<span class="number">255</span>] = <span class="string">“服务器你好啊,吃饭了没?”</span>;</span><br><span class="line"><span class="comment">//通过socketClient想服务器发送指定长度的字符串流,最后的是保留参数</span></span><br><span class="line">send(clientSocket, sendstring, <span class="built_in">strlen</span>(sendstring) + <span class="number">1</span>, <span class="number">0</span>);</span><br></pre></td></tr></table></figure></p><p></p>
-<p></p><p>5 接收消息<br>接收消息是调用的recv方法<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建一个缓冲池,用于从流中读取数据</span></span><br><span class="line"><span class="keyword">char</span> buff[<span class="number">255</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line"><span class="comment">//利用socketClient接收指定长度的流.</span></span><br><span class="line"><span class="keyword">long</span> len = recv(clientSocket, buff, <span class="number">255</span>, <span class="number">0</span>);</span><br><span class="line"><span class="comment">//输出打印</span></span><br><span class="line"><span class="keyword">if</span> (len &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">“%s”</span>,buff);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p></p>
-<p></p><p>作业1<br>HTTP是属于哪一种标准TCP?UDP?why?</p><br><p></p>
-</span>
+        <span itemprop="articleBody"><div class="show-content"><h1>NSURLSession下载与缓存</h1><br><blockquote><p>iOS9要求网络请求需要使用NSURLSession,那么本篇文章<br> 就使用NSURLsession来实现视频的下载,图片的下载、取消下载、恢复下<br> 载和缓存功能，期望与大家一起学习。</p></blockquote><br><ul><br><li><br><p><code>NSURLSessionConfiguration</code>(参数配置类) </p><br><p> NSURLSession状态同时对应着多个连接,不像之前使用共享的一个全局状态。会话是通过工厂方法（类方法)来创建对象<br><code>NSURLSessionConfiguration</code>。</p><br><p> 总共有三种会话：</p><br><p> 1.<code>defaultSessionConfiguration</code> 默认的，进程内会话</p><br><p> 2.<code>ephemeralSessionConfiguration</code>短暂的（内<br>存），进程内会话</p><br><p>3.<code>backgroundSessionConfigurationWithIdentifier</code>后台会话</p><br><ul><br><li><br><p>相关属性</p><br><p>  //后台任务的标识符</p><br><p>   @property (nullable, readonly, copy) NSString <em>id entifier;</em></p><br><p>  //缓存的策略</p><br><p> @property NSURLRequestCachePolicy requestCachePolicy;</p><br><p> //请求超时时长</p><br><p> @property NSTimeInterval timeoutIntervalForRequest;</p><br><p> //网络服务类型</p><br><p> @property NSURLRequestNetworkServiceType networkServiceType;</p><br><p> //是否在非无线的情况下请求网络</p><br><p> @property BOOL allowsCellularAccess;</p><br></li><br></ul><br></li><br></ul><br><hr><br><h2>手动下载视频</h2><br><ul><br><li><br><p>步骤：</p><br><ul><br><li><br><p>在Info.plist中添加NSAppTransportSecurity类型Dictionary。<br>在NSAppTransportSecurity下添加NSAllowsArbitraryLoads类型Boolean,值设为YES;</p><br></li><br><li><br><p>在工程内引入AVFoundation框架，并在相关类引入AVKit、AVFoundation头文件;</p><br></li><br><li>遵守NSURLSessionDelegate，NSURLSessionDownloadDelegate协议；</li><br><li>准备一个MP4格式的url，进行下载；</li><br><li>将下载完成的视频资源存入本地，并进行播放。</li><br></ul><br></li><br><li><br><p>声明相关属性</p><br></li><br></ul><br><pre><code> //下载任务<br> @property (nonatomic, strong)NSURLSessionDownloadTask downTask;<br><br> //网络会话<br> @property (nonatomic, strong)NSURLSession <em> downLoadSession;</em></code></pre><br><ul><br><li>配置相关参数并下载</li><br></ul><br><pre><code>    //参数设置类  简单的网络下载使用<br>      defaultSessionConfiguration即可<br>    NSURLSessionConfiguration          sessionConfig =<br>    [NSURLSessionConfiguration<br>    defaultSessionConfiguration];<br><br>     //创建网络会话<br>     self.downLoadSession = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self delegateQueue:[NSOperationQueue new]];<br><br><br>     //数据请求<br>     /<em>
+      </em>@param URL 资源url<br>      <em>@param timeoutInterval 超时时长
+      </em>/<br>    NSURLRequest <em>imgRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:MP3URL] cachePolicy:5 timeoutInterval:60.f];<br><br>     //创建下载任务<br>    self.downTask = [self.downLoadSession downloadTaskWithRequest:imgRequest];<br><br>     //启动下载任务<br>    [self.downTask resume];</em></code></pre><br><ul><br><li>实现代理方法   </li><br></ul><br><pre><code>  #pragma mark 下载过程<br><br>  -(void)URLSession:(NSURLSession )sessiondownloadTask:(NSURLSessionDownloadTask <em>)downloadTask didWriteData:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite<br>{<br>   //获取下载进度<br>    double currentProgress = totalBytesWritten / (double)totalBytesExpectedToWrite;<br><br>    dispatch_async(dispatch_get_main_queue(), ^{<br><br>   //进行UI操作  设置进度条<br><br>        self.downLoadProgress.progress = currentProgress;<br><br>    });<br><br>  #pragma mark 下载完成 无论成功失败<br><br> -(void)URLSession:(NSURLSession </em>)session task: (NSURLSessionTask <em>)task didCompleteWithError:(NSError </em>)error<br> {<br><br>        NSLog(@” function == %s, line == %d, error ==  %@”,<strong>FUNCTION</strong>,<strong>LINE</strong>,error);<br><br> }<br>   #pragma mark - 下载成功 获取下载内容<br> -(void)URLSession:(NSURLSession <em>)session   downloadTask:(NSURLSessionDownloadTask </em>)downloadTask didFinishDownloadingToURL:(NSURL <em>)location<br> {<br>    //存储本地<br><br>    //1.获取Documents文件夹路径 （不要将视频、音频等较大资源存储在Caches路径下）
+        </em>方法一<br>        NSString <em>documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES) lastObject];
+
+        </em>方法二<br>        NSFileManager <em>manager = [NSFileManager defaultManager];<br>        NSURL </em> documentsDirectory = [fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask][0];<br><br>   //2.创建资源存储路径<br>       NSString <em>appendPath = [NSString stringWithFormat:@”/new.mp4”];<br>       NSString </em>file = [documentsPath stringByAppendingString:appendPath];<br><br>   //3.将下载好的视频资源存储在路径下<br><br>      //删除之前相同路径的文件<br>      BOOL remove  = [manager removeItemAtPath:file error:nil];<br><br>      //将视频资源从原有路径移动到自己指定的路径<br>      BOOL success = [manager copyItemAtPath:location.path toPath:file error:nil];<br><br>        if (success) {<br><br>      //回到主线程进行本地视频播放<br>        dispatch_async(dispatch_get_main_queue(), ^{<br><br>        //创建视频播放的本地路径<br><br>        <strong><em> 请使用此方法创建本地路径<br>        NSURL </em>url = [[NSURL alloc]initFileURLWithPath:file];<br><br>        *</strong> 此方法创建的路径无法播放 不是一个完整的路径<br>        //NSURL <em>url2 = [[NSURL alloc]initWithString:file];<br><br>        //系统的视频播放器<br>        AVPlayerViewController </em>controller = [[AVPlayerViewController alloc]init];<br>        //播放器的播放类<br>        AVPlayer <em> player = [[AVPlayer alloc]initWithURL:url];<br><br>        controller.player = player;<br>        //自动开始播放<br>        [controller.player play];<br>        //推出视屏播放器<br>        [self presentViewController:controller animated:YES completion:nil];<br><br><br>        });<br>    }<br><br> }</em></code></pre><br><ul><br><li><br><p>NSURLSessionDownloadTask支持取消下载，可以在下载过程中随时取消继续下载，同时也可以实现恢复下载。</p><br><ul><br><li><br><p>取消下载 <code>cancelByProducingResumeData</code></p><br><pre><code>//用当前NSURLSessionDownloadTask对象去调用取消下载<br><br>   [self.downTask cancelByProducingResumeData:<br>    ^(NSData  _Nullable resumeData) {<br><br>    //全局变量 接收当前下载的资源<br>    self.data = resumeData;<br>    }<br>    //将当前下载任务置为空<br>    self.downTask = nil;</code></pre><br></li><br><li><br><p>恢复下载 <code>downloadTaskWithResumeData</code></p><br><pre><code>//恢复下载 实际上是建立了一个新的下载任务 去继续之前的下载<br><br>self.downTask = [self.downLoadSession downloadTaskWithResumeData:self.data];<br><br>   //开启任务<br>  [self.downTask resume];<br><br>    }</code></pre><br></li><br></ul><br></li><br></ul><br><h2>自动缓存</h2><br><blockquote><br><p>上面讲到的是自己去手动操控整个下载过程，那么，很多伙伴就会讲这样是不是太麻烦了。如果你了解了NSURLSession的缓存策略，那么，你就会发现，我们这么写确实是太麻烦了，那么下面我们就来学习一下NSURsession的自动缓存。</p><br><p>在开始之前，先介绍一下<code>NSURLRequestUseProtocolCachePolicy</code>的几种缓存策略：</p><br><p> 1&gt;<code>NSURLRequestUseProtocolCachePolicy</code> = 0, 默认的缓存策略， 如果缓存不存在，直接从服务端获取。如果缓存存在，<br>会根据response中的Cache-Control字段判断下一步操作，如: Cache-Control字段为must-revalidata, 则询问服务端该数据是否有更新，无更新的话直接返回给用户缓存数据，若已更新，则请求服务端.</p><br><p>2&gt;<code>NSURLRequestReloadIgnoringLocalCacheData</code> = 1, 忽略本地缓存数据，直接请求服务端.</p><br><p>3&gt;<code>NSURLRequestIgnoringLocalAndRemoteCacheData</code> = 4, 忽略本地缓存，代理服务器以及其他中介，直接请求源服务端.</p><br><p>4&gt;<code>NSURLRequestReloadIgnoringCacheData</code> = NSURLRequestReloadIgnoringLocalCacheData</p><br><p>5&gt;<code>NSURLRequestReturnCacheDataElseLoad</code> = 2, 有缓存就使用，不管其有效性(即忽略Cache-Control字段), 无则请求服务端.</p><br><p>6&gt;<code>NSURLRequestReturnCacheDataDontLoad</code> = 3, 死活加载本地缓存. 没有就失败. (确定当前无网络时使用).</p><br><p>7&gt;<code>NSURLRequestReloadRevalidatingCacheData</code> = 5, 缓存数据必须得得到服务端确认有效才使用(貌似是NSURLRequestUseProtocolCachePolicy中的一种情况)</p><br></blockquote><br><p> 因此，我们可以根据自己的需求去设置不同的缓存策略，而默认的就是如果有缓存就通过缓存获取数据，没有缓存就去请求网络数据。<br>     这里，我们通过一个请求图片的例子，来窥探一下神奇的自动缓存。</p><br><ul><br><li>代码： </li><br></ul><br><pre><code>  //创建一个UIImageView+MyImageView.h的类目，<br>  在.h添加一个方法<br>  - (void)loadIamgeWithURL:(NSString <em>)urlString<br>  //在.m去实现此方法<br>  - (void)loadIamgeWithURL:(NSString </em>)urlString<br>{<br><br>    //创建下载图片的url<br>    NSURL <em>url = [NSURL URLWithString:urlString];<br><br>    //创建网络请求配置类<br>    NSURLSessionConfiguration </em> configuration = [NSURLSessionConfiguration defaultSessionConfiguration];<br><br>    //创建网络会话<br>    NSURLSession <em>session = [NSURLSession sessionWithConfiguration:configuration delegate:nil delegateQueue:[NSOperationQueue new]];<br><br>    //创建请求并设置缓存策略以及超时时长<br>    NSURLRequest </em>imgRequest = [NSURLRequest requestWithURL:url cachePolicy:0 timeoutInterval:30.f];<br>   //<em>也可通过configuration.requestCachePolicy 设置缓存策略<br><br>    //创建一个下载任务<br>    NSURLSessionDownloadTask </em>task = [session downloadTaskWithRequest:imgRequest completionHandler:^(NSURL <em> _Nullable location, NSURLResponse </em> _Nullable response, NSError <em> _Nullable error) {<br><br>      //下载完成后获取数据 此时已经自动缓存到本地，下次会直接从本地缓存获取，不再进行网络请求<br>     NSData </em> data = [NSData dataWithContentsOfURL:location];<br><br>      //回到主线程<br>    dispatch_async(dispatch_get_main_queue(), ^{<br><br>      //设置图片<br>     self.image = [UIImage imageWithData:data];<br>     });<br><br><br>    }];<br><br><br>    //启动下载任务<br>    [task resume];<br><br>  }</code></pre><br><blockquote><p>通过这种缓存策略，我们就可以实现图片下载并自动缓存，当我们需要再次使用此资源的时候，它就会自动去本地缓存查找是否有已经下载好的图片资源，如果有就会直接去本地的，从而不需要再去进行网络请求。可以在下载完成后，将网络断开进行测试。</p></blockquote><br><h2>总结</h2><br><p>  本次主要是讲解了NSURLSession的下载，以及自动缓存策略。它的功能非常强大，还有很多没来得及细细研究，如果你也喜欢它😍，那就抓紧时间去研究吧~</p><br></div></span>
       
     </div>
 
@@ -286,17 +276,13 @@ TCP和UDP先抛开两种IOS中常用的通信方式,我们来看一下计算机�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/01/08/IOS开发之利用AsyncSocket实现即时通信(一)/" rel="next" title="IOS开发之利用AsyncSocket实现即时通信(一)">
-                <i class="fa fa-chevron-left"></i> IOS开发之利用AsyncSocket实现即时通信(一)
+              <a href="/2016/01/14/yuyu/" rel="next" title="Xcode7 中创建静态库">
+                <i class="fa fa-chevron-left"></i> Xcode7 中创建静态库
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/01/12/shapeng/" rel="prev" title="使用讯飞开放平台实现语音识别合成">
-                使用讯飞开放平台实现语音识别合成 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -311,10 +297,10 @@ TCP和UDP先抛开两种IOS中常用的通信方式,我们来看一下计算机�
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/01/08/hello-world/"
-     data-title="socket通信实现"
+        <div class="ds-share flat" data-thread-key="2016/01/18/xiazai/"
+     data-title="NSURLSession下载与缓存"
      data-content=""
-     data-url="http://yoursite.com/2016/01/08/hello-world/">
+     data-url="http://yoursite.com/2016/01/18/xiazai/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -345,8 +331,8 @@ TCP和UDP先抛开两种IOS中常用的通信方式,我们来看一下计算机�
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/01/08/hello-world/"
-           data-title="socket通信实现" data-url="http://yoursite.com/2016/01/08/hello-world/">
+      <div class="ds-thread" data-thread-key="2016/01/18/xiazai/"
+           data-title="NSURLSession下载与缓存" data-url="http://yoursite.com/2016/01/18/xiazai/">
       </div>
     
   </div>
@@ -454,7 +440,7 @@ TCP和UDP先抛开两种IOS中常用的通信方式,我们来看一下计算机�
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">TCP和UDP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">TCP协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">C语言实现的网络通信</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">NSURLSession下载与缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">手动下载视频</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">自动缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
